@@ -1,0 +1,39 @@
+{
+  "name": "coronalife",
+  "version": "1.0.0",
+  "description": "新型コロナのモデルです",
+  "main": "main.js",
+  "scripts": {
+    "start": "webpack --config webpack.config.js && webpack-dev-server",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kotaroyamame/coronaLife.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kotaroyamame/coronaLife/issues"
+  },
+  "homepage": "https://github.com/kotaroyamame/coronaLife#readme",
+  "dependencies": {
+    "@types/chart.js": "^2.9.16",
+    "@types/js-combinatorics": "^0.5.31",
+    "chart.js": "^2.9.3",
+    "copy-webpack-plugin": "^4.6.0",
+    "js-combinatorics": "^0.5.5",
+    "path": "^0.12.7",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "ts-loader": "^5.4.5",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
