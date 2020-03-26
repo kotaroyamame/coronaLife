@@ -108,7 +108,8 @@ export class City {
 				let blockSize = blockMap.get(blockNumber) || 0;
 				blockSize++;
 				blockMap.set(blockNumber, blockSize);
-				//
+				//隔離の条件設定
+				//以下の条件でcoldSizeというのが封鎖条件になります。
 				// if (blockSize >= this.coldSize) {
 				if (Math.random() * 100 <= this.qCoeff * (1 + blockSize * 0.2)) {
 					this.coldBlockSet.add(blockNumber);

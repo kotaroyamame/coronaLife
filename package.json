@@ -1,7 +1,7 @@
 {
   "name": "coronalife",
   "version": "1.0.0",
-  "description": "新型コロナのモデルです",
+  "description": "感染症拡大と隔離のモデルです",
   "main": "main.js",
   "scripts": {
     "start": "webpack --config webpack.config.js && webpack-dev-server",
