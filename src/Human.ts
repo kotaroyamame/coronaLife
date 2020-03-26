@@ -4,7 +4,7 @@ export class Human {
 	color = ["#fff", "#f00", "#00f"];
 	positionStack: Array<[number, number]> = [];
 	tailSize = 10;
-	staightRunCoeff = 95;
+	staightRunCoeff = 97;
 	speed: number = 100;
 	size: number = 10;
 	dropletSize = 10;

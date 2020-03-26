@@ -5,11 +5,10 @@ export class City {
 	droplet: Array<Array<any>>;
 	coldSize: number = 6;
 	infectionRate = 0.5;
-	blockSize: number = 8;
 	qCoeff:number = 0.08;
 	blockList: Array<[[number, number], [number, number]]> = [];
 	coldBlockSet: Set<number> = new Set();
-	constructor(private citySize: number, private humanList: Array<Human>) {
+	constructor(private citySize: number, private humanList: Array<Human>,private blockSize: number = 8) {
 		this.droplet = [...Array(citySize)].map(o => [...Array(citySize)].map(p => []));
 		const blockLength = Math.floor(citySize / this.blockSize);
 		for (let i = 0; i < this.blockSize; i++) {

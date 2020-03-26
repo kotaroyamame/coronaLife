@@ -3,9 +3,11 @@ import { Human } from './Human'
 
 
 import { ChartOptions, Chart } from "chart.js";
-const CITY_SIZE: number = 600;//√セル数
-const HUMAN_SIZE: number = 500;//人の数
-
+window.CITY_SIZE = 600;//√セル数
+window.HUMAN_SIZE = 500;//人の数
+window.HUMAN_SPEED = 100;
+window.RANDOM_COEFF = 50;//乱数定数
+window.CITY_BLOCK_SIZE = 8;
 class CanvasController {
 	is_down = false;
 	startX = 0;
@@ -60,7 +62,7 @@ class Main {
 	static drawCount = 0;
 	static humanChart: Chart | null = null;
 	static canvasController = new CanvasController();
-	//池を描画するサイズ
+	//描画するサイズ
 	static fieldWidth: number = 0;
 	static fieldHeight: number = 0;
 	static widthCoeff: number = 1;
@@ -148,7 +150,7 @@ class Main {
 										ticks: {
 											beginAtZero: true,
 											min: 0,
-											max: HUMAN_SIZE
+											max: window.HUMAN_SIZE
 										}
 									}
 								]
@@ -170,7 +172,7 @@ class Main {
 
 		Main.canvasContext.strokeStyle = `#fff`;
 		this.fieldWidth = Math.min(Main.stageW, Main.stageH);
-		this.widthCoeff = this.fieldWidth / CITY_SIZE;
+		this.widthCoeff = this.fieldWidth / window.CITY_SIZE;
 		const segmentNum = 30;　// 分割数
 		const amplitude = Main.stageH / 3; // 振幅
 		const time = Date.now() / 1000; // 媒介変数(時間)
@@ -216,20 +218,20 @@ class Main {
 			Main.canvasContext.fill();
 		}
 	}
-  /****
-   * Main
-   */
+	/****
+	 * Main
+	 */
 	static main() {
 		const humanList: Array<Human> = [];
-		this.city = new City(CITY_SIZE, humanList);
-		for (let i = 0; i < HUMAN_SIZE; i++) {
-			const human = new Human(CITY_SIZE, this.city, [Math.floor(Math.random() * CITY_SIZE), Math.floor(Math.random() * CITY_SIZE)]);
-			human.speed = human.speed + Math.random() * 80 - 18;
+		this.city = new City(window.CITY_SIZE, humanList,window.CITY_BLOCK_SIZE);
+		for (let i = 0; i < window.HUMAN_SIZE; i++) {
+			const human = new Human(window.CITY_SIZE, this.city, [Math.floor(Math.random() * window.CITY_SIZE), Math.floor(Math.random() * window.CITY_SIZE)]);
+			human.speed = Math.max(window.HUMAN_SPEED + (Math.random() * window.RANDOM_COEFF - window.RANDOM_COEFF/2), 0);
 			humanList.push(human);
 		}
-		const human = new Human(CITY_SIZE, this.city, [CITY_SIZE / 2, CITY_SIZE / 2]);
+		const human = new Human(window.CITY_SIZE, this.city, [window.CITY_SIZE / 2, window.CITY_SIZE / 2]);
 		human.Infect();
-		human.speed = 100;
+		human.speed = window.HUMAN_SPEED;
 		humanList.push(human);
 		// this.city = new City(CITY_SIZE, humanList);
 		const js_city = document.getElementById('js-city');
@@ -260,12 +262,30 @@ class Main {
 }
 
 window.onload = () => {
-	console.log("onload");
+	const elementCitySize: HTMLInputElement = <HTMLInputElement>document.getElementById("CITY_SIZE");
+	elementCitySize.value = window.CITY_SIZE;//√セル数
+	const elementHumanSize: HTMLInputElement = <HTMLInputElement>document.getElementById("HUMAN_SIZE");
+	elementHumanSize.value = window.HUMAN_SIZE;//人の数
+	const elementHumanSpeed: HTMLInputElement = <HTMLInputElement>document.getElementById("HUMAN_SPEED");
+	elementHumanSpeed.value = window.HUMAN_SPEED;
+	const elementHumanSpeedRandomCoeff: HTMLInputElement = <HTMLInputElement>document.getElementById("RANDOM_COEFF");
+	elementHumanSpeedRandomCoeff.value = window.RANDOM_COEFF;//乱数定数;
+	const elementCityBlockSize: HTMLInputElement = <HTMLInputElement>document.getElementById("CITY_BLOCK_SIZE");
+	elementCityBlockSize.value = window.CITY_BLOCK_SIZE;
 	Main.main();
 }
 window.start = () => {
-	console.log("onload");
 	Main.stop();
+	const elementCitySize: HTMLInputElement = <HTMLInputElement>document.getElementById("CITY_SIZE");
+	window.CITY_SIZE = Number(elementCitySize.value);//√セル数
+	const elementHumanSize: HTMLInputElement = <HTMLInputElement>document.getElementById("HUMAN_SIZE");
+	window.HUMAN_SIZE = Number(elementHumanSize.value);//人の数
+	const elementHumanSpeed: HTMLInputElement = <HTMLInputElement>document.getElementById("HUMAN_SPEED");
+	window.HUMAN_SPEED = Number(elementHumanSpeed.value);
+	const elementHumanSpeedRandomCoeff: HTMLInputElement = <HTMLInputElement>document.getElementById("RANDOM_COEFF");
+	window.RANDOM_COEFF = Number(elementHumanSpeedRandomCoeff.value);//乱数定数;
+	const elementCityBlockSize: HTMLInputElement = <HTMLInputElement>document.getElementById("CITY_BLOCK_SIZE");
+	window.CITY_BLOCK_SIZE = Number(elementCityBlockSize.value);
 	Main.main();
 }
 window.reset = () => {

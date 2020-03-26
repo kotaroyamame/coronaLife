@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
   <title>test</title>
@@ -11,17 +12,20 @@
       height: 0;
       overflow: hidden;
     }
-    .canvasWrap{
-      text-align:center;
-			display:inline-block;
+
+    .canvasWrap {
+      text-align: center;
+      display: inline-block;
     }
-    .chartWrap{
-			margin:auto;
-			display:inline-block;
-      text-align:center;
-      width:600px;
-      height:600px;
+
+    .chartWrap {
+      margin: auto;
+      display: inline-block;
+      text-align: center;
+      width: 600px;
+      height: 600px;
     }
+
     .city {
       width: 600px;
       height: 600px;
@@ -30,17 +34,32 @@
   </style>
   <script src="main.js"> </script>
 </head>
+
 <body>
 
   <div class="canvasWrap">
-    <canvas class="city" id="js-city" onclick="window.canvasClick(event)" onmousedown="canvasMousedown(event)" onmouseup="canvasMouseup(event)" onmouseleave="canvasMouseleave(event)" onmousemove="canvasMousemove(event)"></canvas>
+    <canvas class="city" id="js-city" onclick="window.canvasClick(event)" onmousedown="canvasMousedown(event)"
+      onmouseup="canvasMouseup(event)" onmouseleave="canvasMouseleave(event)"
+      onmousemove="canvasMousemove(event)"></canvas>
   </div>
   <div class="chartWrap">
     <canvas id="humanChart" width="400" height="400"></canvas>
   </div>
-  <p></p>
-  
-	<p><button onclick="start()">start</button></p>
-	<p><button onclick="reset()">reset</button></p>
+  <div>
+    <h2>パラメータ調整</h3>
+      <h3>サイズ</h3>
+      <p><input type="number" id="CITY_SIZE"></p>
+      <h3>人の数</h3>
+      <p><input type="number" id="HUMAN_SIZE"></p>
+      <h3>人の速度</h3>
+      <p><input type="number" id="HUMAN_SPEED"></p>
+      <h3>スピード乱数定数</h3>
+      <p><input type="number" id="RANDOM_COEFF"></p>
+      <h3>区間数（x2）</h3>
+      <p><input type="number" id="CITY_BLOCK_SIZE"></p>
+  </div>
+  <p><button onclick="start()">start</button></p>
+  <p><button onclick="reset()">reset</button></p>
 </body>
+
 </html>
